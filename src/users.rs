@@ -19,11 +19,6 @@ pub struct CreateUser {
 pub async fn get_user(Path(user_id): Path<String>) -> Response {
     let user = db::get_user(user_id);
 
-    let mut temp_vec = Vec::new();
-    temp_vec.push(1);
-    temp_vec.push(2);
-    temp_vec.push(3);
-
     match user {
         Some(user) => Json(user).into_response(),
         None => StatusCode::NOT_FOUND.into_response(),
