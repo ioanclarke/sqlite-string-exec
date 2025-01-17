@@ -1,0 +1,57 @@
+### Get all users
+GET http://localhost:3000/users
+
+> {%
+    client.test("'get all' returns 1 user with correct details", () => {
+        client.assert(response.status === 200)
+        client.assert(response.body.length === 1)
+        const user = response.body[0]
+        client.assert(user.id === "1")
+        client.assert(user.username === "John")
+    })
+%}
+
+### Get a user
+GET http://localhost:3000/users/1
+
+> {%
+    client.test("'get by ID' returns user with correct details", () => {
+        client.assert(response.status === 200)
+        client.assert(response.body.id === "1")
+        client.assert(response.body.username === "John")
+    })
+%}
+
+### Update a user
+PATCH http://localhost:3000/users/1
+Content-Type: application/json
+
+{
+  "username": "Alice"
+}
+
+> {%
+    client.test("'update' returns user with correct details", () => {
+        client.assert(response.status === 200)
+        client.assert(response.body.id === "1")
+        client.assert(response.body.username === "Alice")
+    })
+%}
+
+### Create a user
+POST localhost:3000/users
+Content-Type: application/json
+
+{
+  "username": "Bob"
+}
+
+> {%
+    client.test("'create' returns user with correct details", () => {
+        client.assert(response.status === 201)
+        client.assert(response.body.username === "Bob")
+    })
+%}
+
+### Reset DB after tests
+DELETE http://localhost:3000/db
