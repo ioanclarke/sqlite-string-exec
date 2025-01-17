@@ -1,4 +1,3 @@
-use std::fs;
 use crate::db;
 use axum::extract::Path;
 use axum::response::{IntoResponse, Response};
@@ -24,7 +23,7 @@ pub async fn get_user(Path(user_id): Path<String>) -> Response {
     temp_vec.push(1);
     temp_vec.push(2);
     temp_vec.push(3);
-    
+
     match user {
         Some(user) => Json(user).into_response(),
         None => StatusCode::NOT_FOUND.into_response(),
