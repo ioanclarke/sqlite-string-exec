@@ -1,6 +1,6 @@
 This is mostly a basic CRUD app.
 
-The cool part is the database queries
+The cool part is an `Executable` trait that lets you execute database queries like this:
 ```rust
 fn get_all_users() -> Vec<User> {
     "SELECT id, username FROM users".query_many()
