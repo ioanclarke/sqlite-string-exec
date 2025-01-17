@@ -1,9 +1,9 @@
+use axum::response::{IntoResponse, Response};
 use axum::routing::{delete, patch};
 use axum::{
     routing::{get, post},
     Router,
 };
-use axum::response::{IntoResponse, Response};
 use http::StatusCode;
 use rust_crud::db::init_db;
 use rust_crud::users::{create_user, get_all_users, get_user, patch_user};

@@ -90,7 +90,7 @@ impl Executable<User> for &str {
             .collect::<rusqlite::Result<Vec<User>>>()
             .unwrap()
     }
-    fn query_one<P>(&self, params: P) -> Option<User> 
+    fn query_one<P>(&self, params: P) -> Option<User>
     where
         P: IntoIterator + Params,
         P::Item: ToSql,
@@ -98,8 +98,6 @@ impl Executable<User> for &str {
         let conn = DB_CONN.lock().unwrap();
         let mut stmt = conn.prepare(SELECT_USER_BY_ID).unwrap();
 
-        stmt.query_row(params, MAP_ROW_TO_USER)
-            .optional()
-            .unwrap()
+        stmt.query_row(params, MAP_ROW_TO_USER).optional().unwrap()
     }
 }
